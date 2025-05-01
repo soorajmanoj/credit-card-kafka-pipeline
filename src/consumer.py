@@ -3,7 +3,6 @@ import os
 import csv
 import re
 from kafka import KafkaConsumer
-from helper import is_location_close_enough
 from utils import DataProcessor
 
 
@@ -56,6 +55,30 @@ class KafkaTransactionConsumerSimpleReal:
             return match.group(0)
         return None
 
+    def is_location_close_enough(self, zip1, zip2):
+        """Determine if merchant location is close enough to the customer's address.
+
+        Returns:
+            bool: True if the locations are close enough to approve, False if too far apart
+        """
+        if not zip1 or not zip2 or len(zip1) < 5 or len(zip2) < 5:
+            # Can't determine distance with invalid zips
+            return False  # Safer to reject when we can't verify
+
+        # Check first digits of zip codes to determine proximity
+        # Increased allowed distance by allowing first digit to be different
+        if zip1[:1] != zip2[:1]:
+            # Different first digit - very far apart (different regions)
+            return False
+
+        if zip1[:2] != zip2[:2]:
+            # Different second digit but same first digit
+            # Moderately far but will now approve these
+            return True
+
+        # Same first 2+ digits - close enough
+        return True
+
     def validate_transaction(self, record):
         card_id = int(record["card_id"])
         card_info = self.get_card_info(record["card_id"])
@@ -91,7 +114,7 @@ class KafkaTransactionConsumerSimpleReal:
             elif (pending_balance + amount) > card_limit:
                 declined = True
                 reason = "Pending + amount exceeds credit limit"
-            elif txn_type == "purchase" and not is_location_close_enough(
+            elif txn_type == "purchase" and not self.is_location_close_enough(
                 customer_zip, merchant_zip
             ):
                 declined = True

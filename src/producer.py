@@ -29,7 +29,7 @@ class KafkaTransactionProducer:
                     record[key] = float(value)
 
             self.producer.send(self.topic, value=record)
-            time.sleep(0.1)  # simulate real-time streaming
+            # time.sleep(0.1)  # simulate real-time streaming
 
         self.producer.flush()
         print("All transactions sent.")

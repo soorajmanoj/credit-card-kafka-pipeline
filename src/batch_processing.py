@@ -1,7 +1,6 @@
 import csv
 import os
 from collections import defaultdict
-from helper import calculate_credit_score_adjustment, calculate_new_credit_limit
 
 
 class BatchProcessor:
@@ -28,6 +27,64 @@ class BatchProcessor:
             row["credit_score"] = int(float(row["credit_score"]))
             row["annual_income"] = int(float(row["annual_income"]))
             self.customers[row["customer_id"]] = row
+
+    def calculate_credit_score_adjustment(self, usage_percentage):
+        """
+        Calculate credit score adjustment based on credit usage percentage.
+
+        Args:
+            usage_percentage: Credit usage as a percentage of total available credit (0-100)
+
+        Returns:
+            int: Credit score adjustment (positive or negative)
+        """
+        # Credit utilization best practices suggest keeping usage below 30%
+        if usage_percentage <= 10:
+            # Excellent utilization: significant score improvement
+            return 15
+        elif usage_percentage <= 20:
+            # Very good utilization
+            return 10
+        elif usage_percentage <= 30:
+            # Good utilization
+            return 5
+        elif usage_percentage <= 50:
+            # Fair utilization: small penalty
+            return -5
+        elif usage_percentage <= 70:
+            # High utilization: moderate penalty
+            return -15
+        else:
+            # Very high utilization: significant penalty
+            return -25
+
+    def calculate_new_credit_limit(self, old_limit, credit_score_change):
+        """
+        Calculate new credit limit based on credit score changes.
+
+        Args:
+            old_limit: Current credit limit
+            credit_score_change: Amount the credit score changed
+
+        Returns:
+            float: New credit limit
+        """
+        # Only reduce limits when scores drop
+        if credit_score_change >= 0:
+            return old_limit
+
+        # Calculate percentage reduction based on score drop
+        if credit_score_change <= -20:
+            # Significant drop: reduce by 15%
+            reduction_factor = 0.85
+        elif credit_score_change <= -10:
+            # Moderate drop: reduce by 10%
+            reduction_factor = 0.90
+        else:
+            # Small drop: reduce by 5%
+            reduction_factor = 0.95
+
+        return round(old_limit * reduction_factor, -2)  # Round to nearest 100
 
     def approve_pending_transactions(self):
         self.approved = []
@@ -63,7 +120,7 @@ class BatchProcessor:
             else:
                 usage_pct = (balance / limit) * 100
 
-            score_change = calculate_credit_score_adjustment(usage_pct)
+            score_change = self.calculate_credit_score_adjustment(usage_pct)
             old_score = self.customers[cid]["credit_score"]
             new_score = max(300, min(850, old_score + score_change))
             self.customers[cid]["credit_score"] = new_score
@@ -73,7 +130,7 @@ class BatchProcessor:
                 for card in self.cards.values():
                     if card["customer_id"] == cid:
                         old_limit = card["credit_limit"]
-                        card["credit_limit"] = calculate_new_credit_limit(
+                        card["credit_limit"] = self.calculate_new_credit_limit(
                             old_limit, score_change
                         )
 
