@@ -76,6 +76,7 @@ transaction_id,card_id,merchant_name,timestamp,amount,location,transaction_type,
 75,42,Coleman-Moore,2025-04-01T14:53:29,-170.55,"8674 Philip Ville, Troy, NY 12760",refund,,approved,-199.88
 76,29,"Davis, Hays and Wilson",2025-04-01T15:04:39,1095.3,"3921 Fowler Green, White Plains, NY 11863",purchase,,approved,1351.31
 77,35,Vaughn and Sons,2025-04-01T15:15:01,320.94,"1581 Keller Lodge, Yonkers, NY 14257",wire_transfer,,approved,437.04
+78,43,Walls LLC,2025-04-01T15:29:21,93.43,"8778 Benjamin Ville, Jenkinsland, VT 01886",purchase,,declined,495.72
 79,44,"Romero, Wagner and Pineda",2025-04-01T16:01:32,-498.15,"5668 Christopher Centers, Queens, NY 13980",refund,,approved,-115.16
 80,3,"Randall, Owen and Vega",2025-04-01T16:01:50,119.68,"8173 Bryan Common, Schenectady, NY 15179",atm_withdrawal,,approved,1593.6
 81,51,"Smith, Lewis and May",2025-04-01T16:04:09,179.22,"3238 Breanna Lake, Syracuse, NY 16121",purchase,,approved,218.78
@@ -103,13 +104,16 @@ transaction_id,card_id,merchant_name,timestamp,amount,location,transaction_type,
 103,28,Hodge-James,2025-04-01T19:59:41,309.42,"7387 Vasquez Lake, Niagara Falls, NY 17226",p2p_transfer,,approved,1118.81
 104,29,Russell Group,2025-04-01T20:08:57,-475.36,"9229 Rodriguez Park, Buffalo, NY 15936",refund,,approved,1537.66
 105,22,"Carroll, Watson and Casey",2025-04-01T20:10:19,248.68,"6812 Buchanan Ramp, Ithaca, NY 19249",p2p_transfer,,approved,11681.48
+106,9,Torres LLC,2025-04-01T20:22:16,98.31,"3041 Tonya Curve, East Matthewmouth, NJ 02918",purchase,,declined,1659.07
 107,3,Smith-Richardson,2025-04-01T20:27:31,85.94,"8907 Scott Vista, Schenectady, NY 18402",wire_transfer,,approved,1679.54
 108,13,Weeks-Anderson,2025-04-01T20:32:39,348.73,"9704 Booker Track, Ithaca, NY 13278",p2p_transfer,,approved,690.38
 109,24,Dawson LLC,2025-04-01T20:35:25,494.52,"5602 Bell Passage, West Matthewside, CA 92278",p2p_transfer,,approved,3542.27
 110,30,Anderson LLC,2025-04-01T20:36:20,309.54,"7596 Miller Lodge, Syracuse, NY 16494",p2p_transfer,,approved,2522.64
 111,42,"Fowler, Scott and Blackwell",2025-04-01T20:49:26,-181.51,"7408 King Knolls, Bronx, NY 19693",refund,,approved,-381.39
 112,34,Bradley-Wilson,2025-04-01T20:59:52,231.99,"6751 Chelsea Hills, Brooklyn, NY 19235",bill_payment,,approved,690.82
+113,39,"Ramirez, Douglas and Ruiz",2025-04-01T21:25:30,178.29,"3554 Sherry Valley, Lake James, MA 08703",purchase,,declined,4243.74
 114,54,"Bryant, Johnson and Mueller",2025-04-01T21:36:38,81.13,"6711 Jonathan Village, Troy, NY 14939",wire_transfer,,approved,-148.24
+115,57,Lyons LLC,2025-04-01T21:56:16,199.85,"2621 Hayes Ports, East Jasonmouth, TX 76237",purchase,,declined,896.62
 116,6,"Herrera, Hernandez and Acosta",2025-04-01T21:59:53,491.3,"6731 Davidson Station, Schenectady, NY 19908",wire_transfer,,approved,904.8
 117,15,Castro Ltd,2025-04-01T22:05:07,158.2,"9416 Ariel Mission, Niagara Falls, NY 12489",purchase,,approved,291.58
 118,6,"Price, Olson and Roberts",2025-04-01T22:19:14,134.53,"7399 Anderson Orchard, Lisaside, IL 60433",p2p_transfer,,approved,1039.33
@@ -147,6 +151,7 @@ transaction_id,card_id,merchant_name,timestamp,amount,location,transaction_type,
 150,45,Baker-Robinson,2025-04-02T04:26:46,377.07,"6167 Jones Vista, Queens, NY 18926",p2p_transfer,,approved,697.43
 151,22,"Simmons, Bradshaw and Thompson",2025-04-02T04:33:38,334.0,"994 Gray Crossroad, Queens, NY 14456",bill_payment,,approved,12065.57
 152,1,"Munoz, Mack and Mitchell",2025-04-02T05:00:48,27.22,"1667 Nelson Union, Ithaca, NY 10460",atm_withdrawal,,approved,522.86
+153,33,"Williams, Koch and Davenport",2025-04-02T05:07:38,34.51,"7099 Fox Squares, Huertafurt, CA 97681",purchase,,declined,586.52
 154,30,Drake-Waters,2025-04-02T05:13:14,496.89,"5176 Brandon Mountain, Troy, NY 14401",p2p_transfer,,approved,3078.94
 155,13,Hall-Brown,2025-04-02T05:34:56,189.24,"5435 Lopez Meadow, Cheektowaga, NY 13875",purchase,,approved,879.62
 156,27,"Jenkins, Alvarado and Anthony",2025-04-02T05:42:49,245.65,"8765 Brandon Parks, Cheektowaga, NY 12228",bill_payment,,approved,255.15
@@ -169,6 +174,7 @@ transaction_id,card_id,merchant_name,timestamp,amount,location,transaction_type,
 173,50,"Brown, Hall and Green",2025-04-02T09:19:12,-109.25,"4036 Christina Mountains, Troy, NY 15642",refund,,approved,66.11
 174,30,Park Inc,2025-04-02T10:17:25,125.02,"994 Keith Branch, Brooklyn, NY 18054",bill_payment,,approved,3203.96
 175,18,Hernandez-Clements,2025-04-02T10:30:19,190.94,"4488 Copeland Plaza, Utica, NY 13655",atm_withdrawal,,approved,206.13
+176,27,Kane-Campbell,2025-04-02T11:00:22,199.99,"5909 Daniel Drives, Calebland, MA 06141",purchase,,declined,390.38
 177,49,"Brooks, Werner and Owens",2025-04-02T11:18:59,274.98,"6265 Darrell Drive, Rochester, NY 14867",purchase,,approved,645.76
 178,49,"Willis, Hall and Wright",2025-04-02T11:24:36,371.67,"5784 Davis Manor, Syracuse, NY 14617",wire_transfer,,approved,1017.43
 179,32,Rivera-Hurst,2025-04-02T11:25:38,-117.86,"4498 Abigail Tunnel, Yonkers, NY 17058",refund,,approved,1368.0
@@ -219,6 +225,7 @@ transaction_id,card_id,merchant_name,timestamp,amount,location,transaction_type,
 224,53,Castaneda-Davidson,2025-04-02T22:55:48,285.45,"9006 Leonard Grove, Binghamton, NY 14220",p2p_transfer,,approved,2924.65
 225,43,"Williams, Murphy and Lane",2025-04-02T23:15:06,412.5,"300 Michael Mews, White Plains, NY 14777",p2p_transfer,,approved,1736.71
 226,54,Wilson-Fuller,2025-04-02T23:16:23,342.89,"7950 Rogers Drive, Buffalo, NY 17339",bill_payment,,approved,863.01
+227,36,"White, Horton and Grant",2025-04-02T23:28:58,94.73,"7810 Lambert Orchard, Port Alberthaven, IL 63240",purchase,,declined,3882.41
 228,13,Wagner Group,2025-04-03T01:03:25,96.08,"6860 Taylor Drives, New Deanna, TX 76560",wire_transfer,,approved,975.7
 229,26,Hernandez PLC,2025-04-03T01:57:59,111.96,"8245 Murphy Summit, Brooklyn, NY 11593",purchase,,approved,717.6
 230,31,"Potter, Davis and Thomas",2025-04-03T02:11:45,132.98,"1191 Howe Burg, Ithaca, NY 13831",bill_payment,,approved,4510.31
@@ -227,6 +234,7 @@ transaction_id,card_id,merchant_name,timestamp,amount,location,transaction_type,
 233,44,"Conley, Brown and Warren",2025-04-03T03:53:06,402.71,"613 Nicholas Forges, Bronx, NY 15027",p2p_transfer,,approved,471.39
 234,24,Banks-Gates,2025-04-03T03:54:29,-314.62,"6879 Wyatt Village, Niagara Falls, NY 18740",refund,,approved,3227.65
 235,24,"Jackson, Smith and Brooks",2025-04-03T04:04:34,340.21,"3374 Stein Inlet, New York, NY 14516",bill_payment,,approved,3567.86
+236,20,Rogers-Patterson,2025-04-03T04:17:22,5932.35,"7554 Stacey Forks, Yonkers, NY 15610",wire_transfer,,declined,834.09
 237,38,Morrison-Miller,2025-04-03T04:18:33,183.74,"5362 Short Mills, Rochester, NY 12137",atm_withdrawal,,approved,1254.81
 238,27,"Barber, Martin and Glenn",2025-04-03T04:55:44,299.29,"9408 Palmer Lake, Troy, NY 10173",purchase,,approved,1023.35
 239,32,"Hunter, Beck and Brown",2025-04-03T05:45:30,226.92,"7174 King Corner, Brooklyn, NY 16756",bill_payment,,approved,1392.57
@@ -382,6 +390,7 @@ transaction_id,card_id,merchant_name,timestamp,amount,location,transaction_type,
 389,47,"Rios, Oneal and Sanchez",2025-04-04T21:06:30,139.59,"1058 Deborah Mountain, Syracuse, NY 13629",atm_withdrawal,,approved,1912.4
 390,59,Pineda LLC,2025-04-04T21:25:08,10.47,"2002 Ross Glen, Binghamton, NY 13289",purchase,,approved,1073.55
 391,47,Rose-Estrada,2025-04-04T21:32:43,196.73,"3211 Garza Fords, Buffalo, NY 15245",atm_withdrawal,,approved,2109.13
+392,48,Sloan-Lopez,2025-04-04T21:35:10,8.55,"8627 David Stream, Thomastown, VT 08510",purchase,,declined,7479.18
 393,3,"Wallace, Sheppard and Parsons",2025-04-04T21:49:07,-82.3,"970 Cantrell River, Buffalo, NY 14187",refund,,approved,2432.23
 394,46,Stone-Lin,2025-04-04T22:02:54,438.89,"9322 Tran Mountains, Binghamton, NY 10208",p2p_transfer,,approved,1751.99
 395,9,Fry-Cameron,2025-04-04T22:24:32,114.26,"5592 Natasha Fort, Schenectady, NY 11865",purchase,,approved,2318.58
@@ -390,5 +399,6 @@ transaction_id,card_id,merchant_name,timestamp,amount,location,transaction_type,
 398,38,Aguirre PLC,2025-04-04T22:31:48,53.87,"3536 Blair Grove, Queens, NY 10313",p2p_transfer,,approved,1511.86
 399,6,"Patel, Smith and Fox",2025-04-04T22:52:18,37.34,"5465 Hendrix Viaduct, Rochester, NY 17112",purchase,,approved,1464.82
 400,9,"Moore, Moore and Williams",2025-04-04T23:12:09,236.92,"6924 Jeffrey Junction, White Plains, NY 12583",bill_payment,,approved,2555.5
+401,42,Sexton-Jordan,2025-04-04T23:18:48,206.91,"4587 Angel Streets, New Rebeccachester, FL 35373",purchase,,declined,166.52
 402,22,"Coleman, Bailey and Brown",2025-04-04T23:35:25,898.05,"3848 Sean Land, Buffalo, NY 19516",atm_withdrawal,,approved,13609.89
 403,52,Prince and Sons,2025-04-04T23:37:56,346.21,"7658 Kenneth Tunnel, North Todd, TX 70095",p2p_transfer,,approved,3077.38

@@ -93,6 +93,10 @@ class BatchProcessor:
                 tx_copy = tx.copy()
                 tx_copy["status"] = "approved"  # update status
                 self.approved.append(tx_copy)
+            else:
+                tx_copy = tx.copy()
+                tx_copy["status"] = "declined"  # update status
+                self.approved.append(tx_copy)
 
         with open("results/batch_transactions.csv", "w", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=self.approved[0].keys())

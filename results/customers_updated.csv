@@ -10,7 +10,7 @@ customer_id,name,phone_number,address,email,credit_score,annual_income
 9,Jerry Gallagher,856-217-5298,"6094 Monica Squares, Albany, NY 12519",millermark@example.com,726,187100.0
 10,Sarah Massey,893-978-7084,"6558 Ryan Ports, Utica, NY 14476",kevin42@example.com,846,204600.0
 11,Susan Buckley,742-868-4490,"7887 Lauren Row, Binghamton, NY 11232",holtrobert@example.net,717,68900.0
-12,Michael Watson,250-387-6451,"1346 Stein Grove, Brooklyn, NY 13087",sandersandrew@example.com,669,240100.0
+12,Michael Watson,250-387-6451,"1346 Stein Grove, Brooklyn, NY 13087",sandersandrew@example.com,664,240100.0
 13,Kendra Lam,734-920-6015,"2307 Gary Fort, White Plains, NY 11987",sierraanderson@example.org,688,128300.0
 14,Alexander Donaldson,743-357-3975,"6201 Madison Center, Niagara Falls, NY 12513",vwilliams@example.com,760,66200.0
 15,Jonathan Miller,443-476-8563,"2216 Michelle Creek, Yonkers, NY 11499",tboyd@example.com,661,39300.0

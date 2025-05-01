@@ -176,6 +176,7 @@ class KafkaTransactionConsumerSimpleReal:
                 )
 
         print("Saved all processed transactions to results/stream_transactions.csv")
+        print("Exiting consumer. Press Enter.")
 
 
 if __name__ == "__main__":
