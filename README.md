@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://git.rc.rit.edu/s25-dsci-644-sooraj/project-4.git
+git remote add origin https://git.rc.rit.edu/s25-dsci-644-sreeja/project-4.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://git.rc.rit.edu/s25-dsci-644-sooraj/project-4/-/settings/integrations)
+- [ ] [Set up project integrations](https://git.rc.rit.edu/s25-dsci-644-sreeja/project-4/-/settings/integrations)
 
 ## Collaborate with your team
 
