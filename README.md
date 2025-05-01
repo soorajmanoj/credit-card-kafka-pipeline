@@ -1,93 +1,153 @@
-# Project-4
+# Kafka-Based Credit Card Transaction Processing System
+
+## Project Overview
+This project implements a credit card transaction processing system using a **Lambda Architecture**, featuring:
+
+- **Stream Layer:** Real-time validation and classification of transactions.
+- **Batch Layer:** Periodic approval and credit score recalculations.
+- **Serving Layer:** MySQL integration for data persistence and querying.
 
 
+## Dataset Description
 
-## Getting started
+- `customers.csv`: Customer details like address, score, and income
+- `cards.csv`: Credit card details linked to customers
+- `credit_card_types.csv`: Metadata on types of cards
+- `transactions.csv`: Raw transaction data (April 1–4, 2025)
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Architecture & Components
+```
+Producer (MySQL → Kafka)
+     ↓
+Consumer (Kafka → Validated CSV)
+     ↓
+Batch Layer (Finalize Transactions, Update Balances/Scores)
+     ↓
+Push Updates to MySQL
+```
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+### Core Python Scripts
+- `main.py`: Orchestrates the entire pipeline in order
+- `load_data.py`: Loads initial CSVs into MySQL
+- `producer.py`: Streams transactions from MySQL to Kafka
+- `consumer.py`: Validates transactions from Kafka and outputs `stream_transactions.csv`
+- `batch_processing.py`: Approves pending transactions, updates credit scores/limits
+- `push_updates.py`: Pushes updates (cards, customers, batch results) to MySQL
+- `helper.py`: Credit score & limit adjustment rules
+- `utils.py`: Kafka & MySQL configuration management
 
-## Add your files
+## Folder Structure
+```
+project-root/
+├── data/                   # Original CSV data
+├── results/                # Output CSVs from stream and batch layers
+├── src/                    # Python scripts for stream, batch, utility
+├── .env / .env.example     # Environment variables
+├── credit_system_schema.sql
+├── requirements.txt        # Python dependencies
+├── README.md
+└── main.py                 # Entry point to run the full pipeline
+```
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## Environment Variables Setup
+Create a `.env` file:
+```env
+# MySQL Connection Info
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_DB=credit_system
+MYSQL_USER=your_mysql_user
+MYSQL_PASSWORD=your_mysql_password
+
+#  Kafka Configuration
+KAFKA_BROKER=localhost:9092
 
 ```
-cd existing_repo
-git remote add origin https://git.rc.rit.edu/s25-dsci-644-sreeja/project-4.git
-git branch -M main
-git push -uf origin main
+
+## Requirements
+- Python 3.8+
+- Kafka
+- MySQL Server
+- Java 8+ (required for Kafka)
+- pip (Python package manager)
+
+### Python Packages Required:
+- kafka-python
+- mysql-connector-python
+- python-dotenv
+
+## How to Run
+
+### 1. Download and Setup Kafka
+
+```bash
+# Create a directory for Kafka
+mkdir -p ~/kafka
+cd ~/kafka
+
+# Download Kafka 3.8.1
+wget https://downloads.apache.org/kafka/3.8.1/kafka_2.13-3.8.1.tgz
+
+# Extract the archive
+tar -xzf kafka_2.13-3.8.1.tgz
+
+# [Optional] Set up environment variables (add these to your ~/.bashrc or ~/.zshrc for permanence)
+export KAFKA_HOME=~/kafka/kafka_2.13-3.8.1
+export PATH=$PATH:$KAFKA_HOME/bin
 ```
 
-## Integrate with your tools
+### 2. Start Kafka Server
 
-- [ ] [Set up project integrations](https://git.rc.rit.edu/s25-dsci-644-sreeja/project-4/-/settings/integrations)
+```bash
+# Start Zookeeper (in a separate terminal)
+cd ~/kafka/kafka_2.13-3.8.1
+bin/zookeeper-server-start.sh config/zookeeper.properties
 
-## Collaborate with your team
+# Start Kafka server (in another terminal)
+cd ~/kafka/kafka_2.13-3.8.1
+bin/kafka-server-start.sh config/server.properties
+```
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+### 3. Create Kafka Topic
 
-## Test and Deploy
+```bash
+# Create the 'transactions' topic
+cd ~/kafka/kafka_2.13-3.8.1
+bin/kafka-topics.sh --create --topic transactions --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+```
 
-Use the built-in continuous integration in GitLab.
+### 4. Python Environment Setup
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+```bash
+# Create and activate a virtual environment (optional but recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows, use: venv\Scripts\activate
 
-***
+# Install the required packages
+pip install -r requirements.txt
 
-# Editing this README
+# Run the complete pipeline
+python main.py
+```
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+This will:
+1. Rebuild the MySQL schema (`credit_system_schema.sql`)
+2. Load data from CSVs (via `load_data.py`)
+3. Start Kafka consumer and producer
+4. Wait for you to press Enter after Kafka processing completes
+5. Run batch processing
+6. Push updates to MySQL
 
-## Suggestions for a good README
+## Output Files
+Located in `results/` folder:
+- `stream_transactions.csv`: From Kafka consumer
+- `batch_transactions.csv`: Finalized approved transactions
+- `cards_updated.csv`: New balances and credit limits
+- `customers_updated.csv`: Updated credit scores and incomes
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
 
-## Name
-Choose a self-explaining name for your project.
+## Notes
+- Processing is done in sequence: transactions are streamed and handled chronologically
+- Declined transactions are printed in real-time during streaming
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+---

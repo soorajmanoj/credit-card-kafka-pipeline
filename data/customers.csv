@@ -1,0 +1,31 @@
+customer_id,name,phone_number,address,email,credit_score,annual_income
+1,Christopher Jackson,941-984-1208,"2742 Franco Falls, Rochester, NY 12124",mccarthyyolanda@example.net,679,113600.0
+2,John Le,711-287-5160,"462 Ramsey Trafficway, White Plains, NY 12774",johnsongary@example.com,769,74600.0
+3,Angela Hodges,547-960-2140,"1221 Maldonado Parks, Ithaca, NY 15035",erinhorne@example.org,722,132600.0
+4,Emily Jacobson,295-790-9100,"8021 Guerrero Bypass, Albany, NY 14843",collinsjohn@example.net,741,49800.0
+5,Deborah Newton,983-431-9717,"3243 Lori Overpass, Staten Island, NY 17848",claytonsnyder@example.org,733,172200.0
+6,Valerie Anderson,613-268-8682,"5135 Mark Flat, Ithaca, NY 13634",wendy38@example.org,670,126800.0
+7,Joshua Hall,661-919-6121,"7121 Crystal Green, Cheektowaga, NY 13500",laurapowell@example.com,663,53000.0
+8,Natalie Petersen,790-736-7710,"1336 Decker Glen, Cheektowaga, NY 16687",morgan35@example.org,624,71500.0
+9,Jerry Gallagher,856-217-5298,"6094 Monica Squares, Albany, NY 12519",millermark@example.com,711,187100.0
+10,Sarah Massey,893-978-7084,"6558 Ryan Ports, Utica, NY 14476",kevin42@example.com,831,204600.0
+11,Susan Buckley,742-868-4490,"7887 Lauren Row, Binghamton, NY 11232",holtrobert@example.net,702,68900.0
+12,Michael Watson,250-387-6451,"1346 Stein Grove, Brooklyn, NY 13087",sandersandrew@example.com,659,240100.0
+13,Kendra Lam,734-920-6015,"2307 Gary Fort, White Plains, NY 11987",sierraanderson@example.org,673,128300.0
+14,Alexander Donaldson,743-357-3975,"6201 Madison Center, Niagara Falls, NY 12513",vwilliams@example.com,745,66200.0
+15,Jonathan Miller,443-476-8563,"2216 Michelle Creek, Yonkers, NY 11499",tboyd@example.com,666,39300.0
+16,William Mathis,372-394-4709,"7791 Stevens Lane, Cheektowaga, NY 17202",matthewlee@example.org,745,24300.0
+17,Seth Hall,685-764-5631,"9523 David Junctions, Yonkers, NY 15434",johnparker@example.net,714,25500.0
+18,Daniel Hooper,602-540-2228,"9320 Samantha Mountain, Albany, NY 13538",wwillis@example.com,839,272700.0
+19,Colton Bryan,311-366-9503,"7352 Michelle Extensions, Troy, NY 19630",youngkyle@example.net,687,28900.0
+20,Tracy Arnold,418-565-3316,"8867 Patricia Greens, Queens, NY 19539",allencynthia@example.net,697,35400.0
+21,Rebecca Galvan,731-658-5711,"8468 Frederick Lakes, Syracuse, NY 19524",fcook@example.com,786,393600.0
+22,Jerry Elliott,453-721-8956,"6244 Wilkinson Mission, New York, NY 11370",arthurmartin@example.org,777,133100.0
+23,Lauren Ward,841-948-3937,"3775 Schultz Plains, Schenectady, NY 11915",reneegill@example.net,709,429900.0
+24,Kelly Lewis,969-460-8784,"3297 Michael Crescent, Cheektowaga, NY 12963",cheryl52@example.com,715,119300.0
+25,Kerry James,749-983-1055,"5964 Roberts Estates, Albany, NY 13732",snowcharles@example.com,793,779500.0
+26,Dr. John Browning,953-662-6157,"1192 John Trail, White Plains, NY 18893",meaganbell@example.org,710,463000.0
+27,Larry Miranda,632-392-3042,"7789 Matthew Street, Brooklyn, NY 12254",matthewburke@example.org,732,86900.0
+28,Julie Cox,355-715-4803,"3295 Estes Light, Troy, NY 13346",theodorestevenson@example.net,777,77100.0
+29,Pamela Smith,736-202-6843,"172 Valerie Expressway, Staten Island, NY 15962",nancy28@example.org,697,100900.0
+30,Mark Edwards,509-350-6301,"2246 Jill Village, Syracuse, NY 11316",georgewood@example.com,794,255900.0
