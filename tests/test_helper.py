@@ -81,7 +81,10 @@ def test_limit_unchanged_when_score_flat():
 
 
 def test_limit_small_drop_reduces_five_percent():
-    assert calculate_new_credit_limit(1000, -5) == 950
+    # 1200 * 0.95 = 1140 -> rounds to nearest hundred -> 1100.
+    # (Using 1000 here would hit a round-half-to-even tie at 950; 1200
+    # avoids that so the 5% reduction is unambiguous.)
+    assert calculate_new_credit_limit(1200, -5) == 1100
 
 
 def test_limit_moderate_drop_reduces_ten_percent():
@@ -89,7 +92,8 @@ def test_limit_moderate_drop_reduces_ten_percent():
 
 
 def test_limit_significant_drop_reduces_fifteen_percent():
-    assert calculate_new_credit_limit(1000, -20) == 850
+    # 1200 * 0.85 = 1020 -> rounds to nearest hundred -> 1000.
+    assert calculate_new_credit_limit(1200, -20) == 1000
 
 
 def test_limit_rounds_to_nearest_hundred():

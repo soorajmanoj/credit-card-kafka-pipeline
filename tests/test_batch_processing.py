@@ -9,6 +9,7 @@ pytest tmp_path so the results/*.csv files it writes don't touch the repo.
 """
 
 import csv
+import os
 
 import pytest
 
@@ -36,6 +37,7 @@ def make_processor():
 
 def test_approve_pending_transactions_filters_and_writes(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
+    os.makedirs("results")
     bp = make_processor()
 
     bp.approve_pending_transactions()
@@ -53,6 +55,7 @@ def test_approve_pending_transactions_filters_and_writes(tmp_path, monkeypatch):
 
 def test_update_card_balances_applies_approved_amounts(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
+    os.makedirs("results")
     bp = make_processor()
     bp.approve_pending_transactions()
 
@@ -123,6 +126,7 @@ def test_credit_score_is_clamped_to_valid_range():
 
 def test_save_updated_data_writes_both_csvs(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
+    os.makedirs("results")
     bp = make_processor()
     bp.approve_pending_transactions()
     bp.update_card_balances()
