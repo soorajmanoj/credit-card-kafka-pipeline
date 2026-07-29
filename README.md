@@ -1,10 +1,11 @@
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Kafka](https://img.shields.io/badge/Apache_Kafka-231F20?logo=apachekafka&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
+[![CI](https://github.com/soorajmanoj/credit-card-kafka-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/soorajmanoj/credit-card-kafka-pipeline/actions/workflows/ci.yml)
 
 # Kafka-Based Credit Card Transaction Processing System
 
-A real-time + batch transaction processing system built on a **Lambda Architecture** — transactions are validated and classified the moment they arrive, then reconciled and scored on a batch cycle. This pattern mirrors how real payment processors balance low-latency fraud checks against slower, more accurate downstream scoring.
+A real-time + batch transaction processing system built on a **Lambda Architecture** — transactions are validated and classified the moment they arrive, then reconciled and scored on a batch cycle. This is the same general split real payment processors use: fast provisional decisions at the edge, slower and more thorough reconciliation downstream. The implementation here is a small-scale, single-machine version of that idea, not a claim of production-grade parity — no chargebacks, no ACH/network settlement rules, no multi-node fault tolerance.
 
 ## Why Lambda Architecture?
 
@@ -49,11 +50,11 @@ Declined transaction 236 — Amount >= 50% of credit limit
 
 ## Scale & Results
 
-From a single end-to-end run:
+From a single end-to-end run against the included synthetic dataset:
 
-- **403 transactions** streamed through the pipeline in one pass
+- **404 transactions** streamed through the pipeline in one pass
 - **10 declined at the stream layer (~2.5%)** — 9 for a distance-based fraud check ("merchant too far from customer"), 1 for exceeding 50% of the card's credit limit
-- Batch layer reconciled all pending transactions and pushed updates back to MySQL — verified end-to-end via `SELECT COUNT(*) FROM stream_transactions` returning all 403 rows
+- Batch layer reconciled all pending transactions and pushed updates back to MySQL — verified end-to-end via `SELECT COUNT(*) FROM stream_transactions` returning all 404 rows
 - Runs fully unattended aside from one confirmation prompt between the stream and batch phases
 - Full run (schema rebuild → load → stream → batch → MySQL push): ~1 minute wall time on a local dev machine — note this includes the manual confirmation pause built into `main.py`, so it reflects a full working session more than raw throughput
 
@@ -84,9 +85,13 @@ project-root/
 ├── data/                   # Original CSV data
 ├── results/                # Output CSVs from stream and batch layers
 ├── src/                    # Python scripts for stream, batch, utility
+├── tests/                  # pytest suite (helper, batch_processing, consumer)
+├── .github/workflows/      # CI: runs pytest on every push/PR
 ├── .env / .env.example     # Environment variables
 ├── credit_system_schema.sql
 ├── requirements.txt        # Python dependencies
+├── requirements-dev.txt    # pytest (not needed to just run the pipeline)
+├── pytest.ini
 ├── README.md
 └── main.py                 # Entry point to run the full pipeline
 ```
@@ -182,10 +187,23 @@ Located in `results/`:
 - `cards_updated.csv` — new balances and credit limits
 - `customers_updated.csv` — updated credit scores and incomes
 
+## Testing
+
+```bash
+pip install -r requirements.txt -r requirements-dev.txt
+pytest -v
+```
+
+Tests cover the parts of the pipeline that don't require a live Kafka broker or MySQL server: the credit-score/limit/location rules in `helper.py`, the full batch-layer reconciliation flow in `batch_processing.py` (using in-memory data instead of real CSVs), and the stream-layer decline/approve logic in `consumer.py` (with `KafkaConsumer` and the MySQL connection mocked so only the validation rules themselves are under test). `producer.py`, `load_data.py`, `push_updates.py`, and `main.py` are thin orchestration around real Kafka/MySQL calls and aren't covered — they're exercised by actually running the pipeline end-to-end. Every push and pull request to `main` runs this suite via GitHub Actions (CI badge above).
+
 ## Notes
 
 - Processing happens in sequence: transactions are streamed and handled chronologically
 - Declined transactions print in real time during streaming
+
+## Background
+
+This project started as an assignment for RIT DSCI 644 (Spring 2025) — the course provided a starting repo template and a `helper.py` stub with three baseline functions (location check, credit score adjustment, credit limit calculation). Everything else — `main.py`, the Kafka producer/consumer, batch reconciliation, MySQL integration, the finished `helper.py` logic, the test suite, and CI — is my own work, built out and revised well beyond the original assignment.
 
 ## License
 
